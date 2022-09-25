@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/allPlacesFragment">
+
+    <fragment
+        android:id="@+id/allPlacesFragment"
+        android:name="com.example.trenutnovremeusrbijikotlin.AllPlacesFragment"
+        android:label="fragment_all_places"
+        tools:layout="@layout/fragment_all_places">
+        <action
+            android:id="@+id/action_allPlacesFragment_to_favoritesFragment"
+            app:destination="@id/favoritesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="com.example.trenutnovremeusrbijikotlin.FavoritesFragment"
+        android:label="fragment_favorites"
+        tools:layout="@layout/fragment_favorites" >
+        <action
+            android:id="@+id/action_favoritesFragment_to_allPlacesFragment"
+            app:destination="@id/allPlacesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.trenutnovremeusrbijikotlin.SettingsFragment"
+        android:label="SettingsFragment" >
+        <action
+            android:id="@+id/action_settingsFragment_to_allPlacesFragment"
+            app:destination="@id/allPlacesFragment" />
+    </fragment>
+</navigation>
