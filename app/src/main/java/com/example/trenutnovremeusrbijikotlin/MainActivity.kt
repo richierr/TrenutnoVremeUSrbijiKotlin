@@ -1,25 +1,24 @@
 package com.example.trenutnovremeusrbijikotlin
 
-import android.app.Activity
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
-import androidx.navigation.Navigation
-import androidx.navigation.Navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.example.trenutnovremeusrbijikotlin.databinding.ActivityMainBinding
-import com.google.android.material.navigation.NavigationView
+import com.example.trenutnovremeusrbijikotlin.network.ApiCallback
+import com.example.trenutnovremeusrbijikotlin.network.RSSFeed
+import com.example.trenutnovremeusrbijikotlin.network.ServiceGenerator
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
     private var actionbar:ActionBar? = null
@@ -33,6 +32,17 @@ class MainActivity : AppCompatActivity() {
         initToolbar()
         initNavControl()
         initDrawer()
+        var call2: Call<RSSFeed?>? = ServiceGenerator.getRetrofitService().getFeed()
+        call2.enqueue(object :Callback<String>{
+            override fun onResponse(call: Call<String>, response: Response<String>) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onFailure(call: Call<String>, t: Throwable) {
+                TODO("Not yet implemented")
+            }
+        })
+
     }
 
     private fun initNavControl() {
