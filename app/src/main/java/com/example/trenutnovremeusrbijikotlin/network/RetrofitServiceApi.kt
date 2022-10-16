@@ -5,5 +5,6 @@ import retrofit2.http.GET
 
 interface RetrofitServiceApi {
     @GET("latin/osmotreni/index.rss")
+//    suspend fun getFeed(): RSSFeed
     suspend fun getFeed(): RSSFeed
 }

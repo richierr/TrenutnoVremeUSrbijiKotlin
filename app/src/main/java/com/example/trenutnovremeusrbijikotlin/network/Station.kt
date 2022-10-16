@@ -24,4 +24,12 @@ data class Station(
     @field:Element(name = "description")
     @param:Element(name = "description")
     var description: String? = null
-)
+){
+    var humidity:String?=null
+    var descriptionOfConditions:String?=null
+    var descriptionOfConditionsCode:Int?=null
+    var windSpeed:String?=null
+    var windDirection:String?=null
+    var temp:String?=null
+    var pressure:String?=null
+}

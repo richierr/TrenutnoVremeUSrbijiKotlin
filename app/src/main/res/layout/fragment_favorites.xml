@@ -10,4 +10,10 @@
         android:layout_height="match_parent"
         android:text="Hello FROM FAVS" />
 
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="750dp"
+        android:text="Button" />
+
 </FrameLayout>

@@ -32,16 +32,16 @@ class MainActivity : AppCompatActivity() {
         initToolbar()
         initNavControl()
         initDrawer()
-        var call2: Call<RSSFeed?>? = ServiceGenerator.getRetrofitService().getFeed()
-        call2.enqueue(object :Callback<String>{
-            override fun onResponse(call: Call<String>, response: Response<String>) {
-                TODO("Not yet implemented")
-            }
-
-            override fun onFailure(call: Call<String>, t: Throwable) {
-                TODO("Not yet implemented")
-            }
-        })
+//        var call: RSSFeed = ServiceGenerator.instance.getFeed()
+//        call2.enqueue(object :Callback<String>{
+//            override fun onResponse(call: Call<String>, response: Response<String>) {
+//                TODO("Not yet implemented")
+//            }
+//
+//            override fun onFailure(call: Call<String>, t: Throwable) {
+//                TODO("Not yet implemented")
+//            }
+//        })
 
     }
 

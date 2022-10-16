@@ -18,7 +18,6 @@ data class RSSFeed(
     @field:Path("channel")
     @param:Path("channel")
     var channelTitle: String? = null,
-
     /**
      * @return the articleList
      */
@@ -29,6 +28,33 @@ data class RSSFeed(
     @param:ElementList(name = "item", inline = true, required = false)
     @field:Path("channel")
     @param:Path("channel")
-    var articleList: List<Station>? =
-        null
-)
+    var articleList: List<Station>? = null,
+){
+    init {
+        parseData()
+    }
+
+    fun parseData(){
+        articleList?.let {
+            for(article in it){
+                val split: List<String>? = article.description?.split(";")
+                if (split != null) {
+                    for (string in split) {
+                        if (string.contains("Pritisak")) article.pressure=string
+                        if (string.contains("Temperatura")) article.temp=string
+                        if (string.contains("Pravac")) article.windDirection=string
+                        if (string.contains("Brzina")) article.windSpeed=string
+                        if (string.contains("Vlažnost")) article.humidity=string
+                        if (string.contains("Opis")) article.descriptionOfConditions=string
+                        if (string.contains("ifra opisa vremena")) {
+                            var newString = string.replace(" Šifra opisa vremena: ", "")
+                            article.descriptionOfConditionsCode=Integer.valueOf(newString)
+                        }
+                    }
+                }
+            }
+           // feedEntry.setTimeStamp(rssModel.getRss().getChannel().getLastBuildDate())
+        }
+
+    }
+}
