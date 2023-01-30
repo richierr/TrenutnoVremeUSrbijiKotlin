@@ -31,33 +31,6 @@ object ServiceGenerator {
                 .build()
         retrofit.create()
     }
-//
-//
-//
-//    private val logging = HttpLoggingInterceptor()
-//    private val httpClient = OkHttpClient.Builder().interceptors().add(Interceptor { chain ->
-//        val originalRequest: Request = chain.request()
-//        val builder: Request.Builder =
-//            originalRequest.newBuilder()
-//                .method(originalRequest.method(), originalRequest.body())
-//        Log.d("request log", originalRequest.toString())
-//        chain.proceed(builder.build())
-//    })
-//    //logging.setLevel(HttpLoggingInterceptor.Level.BODY)
-//    init {
-//        httpClient.
-//    }
-//    private val retrofitBuilder: Retrofit.Builder = Retrofit.Builder().client(httpClient).baseUrl(Constants.automaticStationsUrl).addConverterFactory(
-//        SimpleXmlConverterFactory.create())
-//
-//
-//    private val retrofit: Retrofit = retrofitBuilder.build()
-//
-//    private val retrofitServiceApi:RetrofitServiceApi=retrofit.create(RetrofitServiceApi::class.java)
-//
-//    fun getRetrofitService():RetrofitServiceApi{
-//        return retrofitServiceApi
-//    }
 }
 
 

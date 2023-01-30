@@ -13,7 +13,7 @@ object WeatherRepository {
             var rssFeed=ServiceGenerator.instance.getFeed()
             return rssFeed
         }catch (cause :Throwable){
-            println("RRRR " +cause.message)
+            println("Error " + cause.message)
 
         }
         return null

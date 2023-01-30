@@ -31,5 +31,6 @@ data class Station(
     var windSpeed:String?=null
     var windDirection:String?=null
     var temp:String?=null
-    var pressure:String?=null
+    var pressure: String? = null
+    var favorite: Boolean = false
 }
