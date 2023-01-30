@@ -1,22 +1,20 @@
 package com.example.trenutnovremeusrbijikotlin
 
 import android.app.Application
-import android.content.SharedPreferences
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.preference.PreferenceManager
 import com.example.trenutnovremeusrbijikotlin.network.RSSFeed
 import com.example.trenutnovremeusrbijikotlin.network.Station
 import com.example.trenutnovremeusrbijikotlin.repository.WeatherRepository
 import kotlinx.coroutines.launch
+import java.util.function.Consumer
 
 class SharedPlacesViewModel(application: Application) : AndroidViewModel(application) {
     val rssFeedData: MutableLiveData<RSSFeed> = MutableLiveData()
-    val sharedPreferencesEditor =
+    val sharedPreferences =
         PreferenceManager.getDefaultSharedPreferences(getApplication<Application>().applicationContext)
-            .edit()
 
     fun onClick(clickedStation: Station) {
         rssFeedData.value?.let {
@@ -29,14 +27,30 @@ class SharedPlacesViewModel(application: Application) : AndroidViewModel(applica
             val listOfFavs = it.articleList.filter { station -> station.favorite }
                 .map { station -> station.title }
             val favorites = listOfFavs.toHashSet()
-            sharedPreferencesEditor.putStringSet("favStations", favorites).commit()
+            sharedPreferences.edit().putStringSet("favStations", favorites).commit()
         }
     }
 
 
+    private fun getFavs(): HashSet<String> {
+        var prefSet: HashSet<String>? =
+            sharedPreferences.getStringSet("favStations", HashSet<String>())
+                ?.let { HashSet(it) }
+        return prefSet ?: HashSet()
+    }
+
     fun refreshData() {
         viewModelScope.launch {
-            rssFeedData.postValue(WeatherRepository.fetchData())
+            var favs = getFavs()
+            var result = WeatherRepository.fetchData()
+            result?.let {
+                if (favs.isNotEmpty()) {
+                    it.articleList.forEach(Consumer { station ->
+                        if (favs.contains(station.title)) station.favorite = true
+                    })
+                }
+                rssFeedData.postValue(it)
+            }
             //var call: RSSFeed = ServiceGenerator.instance.getFeed()
             // println(call)
 //            call.enqueue(object : Callback<String> {
