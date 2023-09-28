@@ -3,6 +3,7 @@ package com.example.trenutnovremeusrbijikotlin.network
 import android.util.Log
 import com.example.trenutnovremeusrbijikotlin.util.Constants
 import com.localebro.okhttpprofiler.OkHttpProfilerInterceptor
+import com.pluto.plugins.network.okhttp.addPlutoOkhttpInterceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -14,11 +15,14 @@ object ServiceGenerator {
     private val okHttpClient1 = OkHttpClient.Builder()
         .addInterceptor { chain ->
             val original = chain.request()
-            val requestBuilder = original.newBuilder().method(original.method(), original.body())
+            val requestBuilder = original.newBuilder().method(original.method, original.body)
             Log.d("req log", original.toString())
             val request = requestBuilder.build()
             chain.proceed(request)
-        }.addInterceptor(OkHttpProfilerInterceptor()).addInterceptor(HttpLoggingInterceptor())
+        }
+        .addInterceptor(OkHttpProfilerInterceptor())
+        .addInterceptor(HttpLoggingInterceptor())
+        .apply { addPlutoOkhttpInterceptor() }
         .build()
 
 

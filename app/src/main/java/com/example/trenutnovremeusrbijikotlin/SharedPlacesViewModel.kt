@@ -1,6 +1,7 @@
 package com.example.trenutnovremeusrbijikotlin
 
 import android.app.Application
+import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -44,6 +45,7 @@ class SharedPlacesViewModel(application: Application) : AndroidViewModel(applica
             var favs = getFavs()
             var result = WeatherRepository.fetchData()
             result?.let {
+                Toast.makeText(getApplication<Application>().applicationContext,result.channelTitle,Toast.LENGTH_LONG).show()
                 if (favs.isNotEmpty()) {
                     it.articleList.forEach(Consumer { station ->
                         if (favs.contains(station.title)) station.favorite = true

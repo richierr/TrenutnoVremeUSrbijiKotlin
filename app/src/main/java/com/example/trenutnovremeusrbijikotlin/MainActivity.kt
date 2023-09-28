@@ -29,18 +29,21 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding=DataBindingUtil.setContentView(this,R.layout.activity_main)
-        initToolbar()
-        initNavControl()
-        initDrawer()
-    }
 
-    private fun initNavControl() {
+
+        //init toolbar
+        toolbar=binding.toolbarInMainAct as Toolbar
+        setSupportActionBar(toolbar)
+        actionbar=supportActionBar
+        actionbar?.setDisplayHomeAsUpEnabled(true)
+        actionbar?.setHomeButtonEnabled(true)
+        actionbar?.setDisplayShowTitleEnabled(false)
+
+        //init nav controler
         val navHostFrag=supportFragmentManager.findFragmentById(R.id.nav_host_fragment_container)
         navController= navHostFrag?.findNavController()
-    }
 
-
-    private fun initDrawer() {
+        //initDrawer
         val drawerLayout=binding.mainDrawerLayout
         val actionBarDrawerToggle=ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close)
         drawerLayout.setDrawerListener(actionBarDrawerToggle)
@@ -64,15 +67,6 @@ class MainActivity : AppCompatActivity() {
 //        drawerLayout.closeDrawers()
 //        return true
 //    }
-
-    private fun initToolbar() {
-        toolbar=binding.toolbarInMainAct as Toolbar
-        setSupportActionBar(toolbar)
-        actionbar=supportActionBar
-        actionbar?.setDisplayHomeAsUpEnabled(true)
-        actionbar?.setHomeButtonEnabled(true)
-        actionbar?.title = "Drawer"
-    }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_navigation_drawer,menu)

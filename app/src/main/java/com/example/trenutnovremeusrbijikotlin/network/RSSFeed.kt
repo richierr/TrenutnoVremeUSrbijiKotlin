@@ -29,12 +29,12 @@ data class RSSFeed(
     @field:Path("channel")
     @param:Path("channel")
     var articleList: List<Station> = ArrayList()
-){
+) {
     init {
         parseData()
     }
 
-    fun parseData(){
+    fun parseData() {
         articleList.let {
             for (article in it) {
                 val split: List<String>? = article.description?.split(";")
@@ -48,7 +48,7 @@ data class RSSFeed(
                         if (string.contains("Opis")) article.descriptionOfConditions = string
                         if (string.contains("ifra opisa vremena")) {
                             val newString = string.replace(" Šifra opisa vremena: ", "")
-                            article.descriptionOfConditionsCode=Integer.valueOf(newString)
+                            article.descriptionOfConditionsCode = Integer.valueOf(newString)
                         }
                     }
                 }

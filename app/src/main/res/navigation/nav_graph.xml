@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_allPlacesFragment_to_favoritesFragment"
             app:destination="@id/favoritesFragment" />
+        <action
+            android:id="@+id/action_allPlacesFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/favoritesFragment"
@@ -22,6 +25,9 @@
         <action
             android:id="@+id/action_favoritesFragment_to_allPlacesFragment"
             app:destination="@id/allPlacesFragment" />
+        <action
+            android:id="@+id/action_favoritesFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
@@ -30,5 +36,8 @@
         <action
             android:id="@+id/action_settingsFragment_to_allPlacesFragment"
             app:destination="@id/allPlacesFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_favoritesFragment"
+            app:destination="@id/favoritesFragment" />
     </fragment>
 </navigation>
