@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id("androidx.navigation.safeargs")
+    id('kotlin-kapt')
 }
 
 android {
@@ -68,6 +69,11 @@ dependencies {
     releaseImplementation "com.plutolib:pluto-no-op:$plutoVersion"
     debugImplementation "com.plutolib.plugins:bundle-core:$plutoVersion"
     releaseImplementation "com.plutolib.plugins:bundle-core-no-op:$plutoVersion"
-//    def work_version = "2.8.1"
-//    implementation "android.arch.work:work-runtime-ktx:$work_version"
+
+
+    implementation "androidx.room:room-runtime:2.5.2"
+    kapt "androidx.room:room-compiler:2.5.2"
+
+    // Optional - Kotlin Extensions and Coroutines support for Room
+    implementation "androidx.room:room-ktx:2.5.2"
 }

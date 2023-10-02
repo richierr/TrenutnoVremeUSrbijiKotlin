@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/allPlacesFragment"
-        android:name="com.example.trenutnovremeusrbijikotlin.AllPlacesFragment"
+        android:name="com.example.trenutnovremeusrbijikotlin.fragments.AllPlacesFragment"
         android:label="fragment_all_places"
         tools:layout="@layout/fragment_all_places">
         <action
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/favoritesFragment"
-        android:name="com.example.trenutnovremeusrbijikotlin.FavoritesFragment"
+        android:name="com.example.trenutnovremeusrbijikotlin.fragments.FavoritesFragment"
         android:label="fragment_favorites"
         tools:layout="@layout/fragment_favorites" >
         <action
@@ -31,7 +31,7 @@
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.example.trenutnovremeusrbijikotlin.SettingsFragment"
+        android:name="com.example.trenutnovremeusrbijikotlin.fragments.SettingsFragment"
         android:label="SettingsFragment" >
         <action
             android:id="@+id/action_settingsFragment_to_allPlacesFragment"

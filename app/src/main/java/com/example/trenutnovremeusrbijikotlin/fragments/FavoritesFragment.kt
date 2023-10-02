@@ -1,4 +1,4 @@
-package com.example.trenutnovremeusrbijikotlin
+package com.example.trenutnovremeusrbijikotlin.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.trenutnovremeusrbijikotlin.SharedPlacesViewModel
 import com.example.trenutnovremeusrbijikotlin.databinding.FragmentFavoritesBinding
 import com.example.trenutnovremeusrbijikotlin.ui.StationAdapter
 
@@ -39,7 +40,7 @@ class FavoritesFragment : Fragment() {
     }
 
     private fun setUpObserver() {
-        viewModel.rssFeedData.observe(viewLifecycleOwner) {
+        viewModel._rssFeedData.observe(viewLifecycleOwner) {
             it?.let {
                 adapter.setData(it.articleList.filter { station -> station.favorite })
             }
@@ -50,14 +51,14 @@ class FavoritesFragment : Fragment() {
     private fun setUpReccy() {
         binding.favsRecy.setHasFixedSize(true)
         binding.favsRecy.layoutManager = LinearLayoutManager(context)
-        adapter = StationAdapter(viewModel.rssFeedData.value?.articleList ?: ArrayList())
+        adapter = StationAdapter(viewModel._rssFeedData.value?.articleList ?: ArrayList())
         adapter.listener = viewModel
         binding.favsRecy.adapter = adapter
     }
 
-    private fun getFavorites(): HashSet<String>? {
-        return sharedPreferenceManager?.getStringSet("stations", HashSet<String>())
-            ?.let { HashSet<String>(it) }
-    }
+//    private fun getFavorites(): HashSet<String>? {
+//        return sharedPreferenceManager?.getStringSet("stations", HashSet<String>())
+//            ?.let { HashSet<String>(it) }
+//    }
 
 }

@@ -1,24 +1,19 @@
-package com.example.trenutnovremeusrbijikotlin
+package com.example.trenutnovremeusrbijikotlin.fragments
 
-import android.content.SharedPreferences
-import android.content.SharedPreferences.OnSharedPreferenceChangeListener
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.get
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.trenutnovremeusrbijikotlin.SharedPlacesViewModel
 import com.example.trenutnovremeusrbijikotlin.databinding.FragmentAllPlacesBinding
-import com.example.trenutnovremeusrbijikotlin.network.Station
 import com.example.trenutnovremeusrbijikotlin.ui.StationAdapter
 
-class AllPlacesFragment : Fragment() {
-    lateinit var binding:FragmentAllPlacesBinding
+class AllPlacesFragment : AbstractBaseFragment() {
+    lateinit var binding: FragmentAllPlacesBinding
     private lateinit var adapter: StationAdapter
-    private lateinit var viewModel: SharedPlacesViewModel
 
     companion object {
         fun newInstance() = AllPlacesFragment()
@@ -34,9 +29,8 @@ class AllPlacesFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        activity?.let { viewModel = ViewModelProvider(it).get(SharedPlacesViewModel::class.java) }
-        viewModel.rssFeedData.value ?: viewModel.refreshData()
-        binding.button.setOnClickListener { viewModel.refreshData() }
+        activity?.let { mViewModel = ViewModelProvider(it).get(SharedPlacesViewModel::class.java) }
+        binding.button.setOnClickListener { mViewModel.refreshDataSync() }
         setUpObservers()
         setUpReccy()
     }
@@ -44,8 +38,8 @@ class AllPlacesFragment : Fragment() {
     private fun setUpReccy() {
         binding.allPlacesRecy.setHasFixedSize(true)
         binding.allPlacesRecy.layoutManager = LinearLayoutManager(context)
-        adapter = StationAdapter(viewModel.rssFeedData.value?.articleList ?: ArrayList())
-        adapter.listener = viewModel
+        adapter = StationAdapter(mViewModel._rssFeedData.value?.articleList ?: ArrayList())
+        adapter.listener = mViewModel
         binding.allPlacesRecy.adapter = adapter
     }
 
@@ -60,7 +54,7 @@ class AllPlacesFragment : Fragment() {
     }
 
     private fun setUpObservers() {
-        viewModel.rssFeedData.observe(viewLifecycleOwner) {
+        mViewModel.latestData.observe(viewLifecycleOwner) {
             it?.let { adapter.setData(it.articleList) }
         }
     }
